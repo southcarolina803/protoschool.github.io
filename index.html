@@ -1,3 +1,47 @@
 <!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=favicon.png><link href="https://fonts.googleapis.com/css?family=Roboto" rel=stylesheet><title>ProtoSchool</title><style>body {
         font-family: 'Roboto', sans-serif;
-      }</style><link as=script href=app.0c1c589c.js rel=preload><link as=style href=app.9fbbc6b2.css rel=preload><link as=script href=chunk-vendors.547d1d95.js rel=preload><link as=style href=chunk-vendors.c7d0868a.css rel=preload><link href=chunk-vendors.c7d0868a.css rel=stylesheet><link href=app.9fbbc6b2.css rel=stylesheet></head><body><noscript><strong>We're sorry but ProtoSchool doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=chunk-vendors.547d1d95.js></script><script src=app.0c1c589c.js></script></body></html>
+      }</style><link as=script href=app.0c1c589c.js rel=preload><link as=style href=app.9fbbc6b2.css rel=preload><link as=script href=chunk-vendors.547d1d95.js rel=preload><link as=style href=chunk-vendors.c7d0868a.css rel=preload><link href=chunk-vendors.c7d0868a.css rel=stylesheet><link href=app.9fbbc6b2.css rel=stylesheet></head><body><noscript><strong>We're sorry but ProtoSchool doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script>/* https://github.com/schalkneethling/dnt-helper/blob/master/js/dnt-helper.js
+      */
+      function _dntEnabled (dnt, userAgent) {
+        'use strict'
+        var dntStatus = dnt || navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack
+        var ua = userAgent || navigator.userAgent
+        var anomalousWinVersions = ['Windows NT 6.1', 'Windows NT 6.2', 'Windows NT 6.3']
+
+        var fxMatch = ua.match(/Firefox\/(\d+)/)
+        var ieRegEx = /MSIE|Trident/i
+        var isIE = ieRegEx.test(ua)
+        var platform = ua.match(/Windows.+?(?=;)/g)
+        if (isIE && typeof Array.prototype.indexOf !== 'function') {
+          return false
+        } else if (fxMatch && parseInt(fxMatch[1], 10) < 32) {
+          dntStatus = 'Unspecified'
+        } else if (isIE && platform && anomalousWinVersions.indexOf(platform.toString()) !== -1) {
+          dntStatus = 'Unspecified'
+        } else {
+          dntStatus = { '0': 'Disabled', '1': 'Enabled' }[dntStatus] || 'Unspecified'
+        }
+        return dntStatus === 'Enabled'
+      }
+      /* From https://github.com/nodejs/nodejs.org/blob/703bacbc0da63fa91f156468209758c66c01f30f/layouts/partials/footer.hbs */
+      (function(){
+        if (!_dntEnabled() && location.hostname === 'proto.school') {
+          !function(n,o,d,e,j,s){n.GoogleAnalyticsObject=d;n[d]||(n[d]=function(){
+          (n[d].q=n[d].q||[]).push(arguments)});n[d].l=+new Date;j=o.createElement(e);
+          s=o.getElementsByTagName(e)[0];j.async=1;j.src='//www.google-analytics.com/analytics.js';
+          s.parentNode.insertBefore(j,s)}(window,document,'ga','script');
+          if (!ga) return;
+          ga('create', 'UA-96910779-4', 'auto');
+          ga('send', 'pageview');
+          document.documentElement.addEventListener('click', function(e) {
+            // Track case studies
+            if(!e.target || !e.target.dataset || !e.target.dataset.casestudy) return;
+            ga('send', 'event', {
+              eventCategory: 'casestudy',
+              eventAction: 'click',
+              eventLabel: e.target.dataset.casestudy,
+              eventValue: 0
+            });
+          });
+        }
+      })();</script><script src=chunk-vendors.547d1d95.js></script><script src=app.0c1c589c.js></script></body></html>
