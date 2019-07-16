@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ProtoSchool is an educational community that teaches decentralized web protocols and tools through online tutorials and local chapter events."><meta name=google-site-verification content=kex8f9OaacZS2GAJ_M5UupW0x-h4X3zYj8qaPJNV2JM><meta property=og:title content=ProtoSchool><meta property=og:description content="Interactive tutorials on decentralized web protocols. Complete code challenges online or at a local chapter event."><meta property=og:image content=https://proto.school/protoschool_screenshot.png><meta property=og:url content=https://proto.school><meta name=twitter:card content=summary_large_image><meta property=og:site_name content=ProtoSchool><meta name=twitter:image:alt content="ProtoSchool screenshot"><meta name=twitter:site content=@ProtoSchool><link rel=icon href=favicon.png><link href="https://fonts.googleapis.com/css?family=Roboto" rel=stylesheet><title>ProtoSchool</title><style>body {
         font-family: 'Roboto', sans-serif;
-      }</style><link href=js/chunk-5a415641.b00ca805.js rel=prefetch><link href=css/app.af9c6ecf.css rel=preload as=style><link href=css/chunk-vendors.865da6ce.css rel=preload as=style><link href=js/app.e4acb7db.js rel=preload as=script><link href=js/chunk-vendors.b54879fd.js rel=preload as=script><link href=css/chunk-vendors.865da6ce.css rel=stylesheet><link href=css/app.af9c6ecf.css rel=stylesheet></head><body><noscript><strong>We're sorry but ProtoSchool doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script>/* https://github.com/schalkneethling/dnt-helper/blob/master/js/dnt-helper.js
+      }</style><link href=js/chunk-5a415641.b00ca805.js rel=prefetch><link href=css/app.af9c6ecf.css rel=preload as=style><link href=css/chunk-vendors.865da6ce.css rel=preload as=style><link href=js/app.f8f6ac0f.js rel=preload as=script><link href=js/chunk-vendors.b54879fd.js rel=preload as=script><link href=css/chunk-vendors.865da6ce.css rel=stylesheet><link href=css/app.af9c6ecf.css rel=stylesheet></head><body><noscript><strong>We're sorry but ProtoSchool doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script>/* https://github.com/schalkneethling/dnt-helper/blob/master/js/dnt-helper.js
       */
       function _dntEnabled (dnt, userAgent) {
         'use strict'
@@ -23,25 +23,37 @@
         }
         return dntStatus === 'Enabled'
       }
-      /* From https://github.com/nodejs/nodejs.org/blob/703bacbc0da63fa91f156468209758c66c01f30f/layouts/partials/footer.hbs */
+
+      //some default pre init
+      var Countly = Countly || {};
+      Countly.q = Countly.q || [];
+
       (function(){
+
+        // ************ FOR TESTING ONLY ************************
+        // Uncomment line below for testing, comment out for deployment
+        // if (!_dntEnabled()) {
+        // *******************************************************
+
+        // *********** FOR DEPLOYMENT *****************************
+        // Comment out line below for testing, uncomment for deployment
         if (!_dntEnabled() && location.hostname === 'proto.school') {
-          !function(n,o,d,e,j,s){n.GoogleAnalyticsObject=d;n[d]||(n[d]=function(){
-          (n[d].q=n[d].q||[]).push(arguments)});n[d].l=+new Date;j=o.createElement(e);
-          s=o.getElementsByTagName(e)[0];j.async=1;j.src='//www.google-analytics.com/analytics.js';
-          s.parentNode.insertBefore(j,s)}(window,document,'ga','script');
-          if (!ga) return;
-          ga('create', 'UA-96910779-4', 'auto');
-          ga('send', 'pageview');
-          document.documentElement.addEventListener('click', function(e) {
-            // Track case studies
-            if(!e.target || !e.target.dataset || !e.target.dataset.casestudy) return;
-            ga('send', 'event', {
-              eventCategory: 'casestudy',
-              eventAction: 'click',
-              eventLabel: e.target.dataset.casestudy,
-              eventValue: 0
-            });
-          });
-        }
-      })();</script><script src=js/chunk-vendors.b54879fd.js></script><script src=js/app.e4acb7db.js></script></body></html>
+        // *******************************************************
+
+          //provide countly initialization parameters
+          Countly.app_key = 'c785b6eaa9c61617e1a7db83cb437e5f3dfe4280';
+          Countly.url = 'https://countly.ipfs.io';
+
+          Countly.q.push(['track_sessions']);
+          Countly.q.push(['track_pageview']);
+          Countly.q.push(['track_clicks']);
+
+          //load countly script asynchronously
+           var cly = document.createElement('script'); cly.type = 'text/javascript';
+           cly.async = true;
+           //enter url of script here
+           cly.src = 'https://countly.ipfs.io/sdk/web/countly.min.js';
+           cly.onload = function(){Countly.init()};
+           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
+         }
+      })();</script><script src=js/chunk-vendors.b54879fd.js></script><script src=js/app.f8f6ac0f.js></script></body></html>
