@@ -1,7 +1,7 @@
 <template>
   <div class="pt2">
     <div v-if="output.test.error" class="lh-copy pv2 ph3 bg-red white">
-      Error: {{output.test.error.message}}
+      {{output.test.error}}
     </div>
     <div
       v-if="output.test.fail"

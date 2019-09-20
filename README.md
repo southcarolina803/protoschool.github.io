@@ -355,7 +355,7 @@ Within the `validate` function, add cases for the specific error messages
 you need to override, as in this example:
 
 ```js
-} else if (result.error && result.error.message === 'No child name passed to addLink') {
+} else if (result instanceof Error && result.message === 'No child name passed to addLink') {
   // Forgot the file name and just used a directory as the path
   return { fail: 'Uh oh. It looks like you created a directory instead of a file. Did you forget to include a filename in your path?' }
 }
@@ -365,13 +365,7 @@ You may choose to use markdown formatting in your responses.
 
 Be sure to adapt your test case so that it works within the context of your other conditionals to meet your validation needs. What is required is that you return an object with the `fail` key and a string as its value; that string is what will be shown to the user.
 
-You'll also need to add the following lines below your custom validation so that
-external error messages you haven't specifically overridden will continue to be shown to the user to aid in troubleshooting:
-
-```js
-// Output the default error if we haven't caught any
-return { error: result.error }
-```
+If you don't return anything from your custom validation and running the users' solution caused an Error to be thrown, it'll be shown to the user, otherwise a default error message will be shown asking them to reset their solution text and try again.
 
 Note that most tutorial lessons will _not_ require the overriding of external
 errors. If you have questions about whether to use this optional feature, please reach

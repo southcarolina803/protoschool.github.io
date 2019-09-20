@@ -34,8 +34,6 @@ const validate = async (result, ipfs) => {
       logDesc: "Here's the secret message you discovered in the file:",
       log: result
     }
-  } else if (result.error) {
-    return { error: result.error }
   }
 }
 
