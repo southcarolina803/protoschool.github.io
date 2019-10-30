@@ -18,7 +18,7 @@ const validate = async (result, ipfs) => {
   let listedSome = null
   let listedSomeStuff = null
 
-  /***** CHECK FOR DOING LS ON SOMETHING OTHER THAN ROOT ******/
+  /** *** CHECK FOR DOING LS ON SOMETHING OTHER THAN ROOT ******/
 
   let stringifiedResult = JSON.stringify(result, null, 2)
   let ipfsFilesInRoot = await ipfs.files.ls('/', { long: true })
@@ -37,12 +37,12 @@ const validate = async (result, ipfs) => {
     }
   }
 
-  /***** OFFER STRING VALUES FOR LOGGING IN UI  ******/
+  /** *** OFFER STRING VALUES FOR LOGGING IN UI  ******/
 
   let logRoot = JSON.stringify(ipfsFilesInRoot, null, 2)
   let logResult = JSON.stringify(result, null, 2)
 
-  /***** CHECK FOR CORRECT /SOME/STUFF DIRECTORY ******/
+  /** *** CHECK FOR CORRECT /SOME/STUFF DIRECTORY ******/
 
   // Correct directory hash
   const someStuffHash = 'QmVneuc3suf78aVdvFY3BW9HoiEfNxD7WB5zu1f9fbun3D' // /some/stuff/
@@ -57,7 +57,7 @@ const validate = async (result, ipfs) => {
     }
   }
 
-  /****** CHECK FOR CORRECT FILENAMES *****/
+  /** **** CHECK FOR CORRECT FILENAMES *****/
 
   let uploadedFiles = window.uploadedFiles || false
   let resultSorted = null
@@ -74,7 +74,7 @@ const validate = async (result, ipfs) => {
     }
   }
 
-  /****** DISPLAY FAILURE/SUCCESS MESSAGES *****/
+  /** **** DISPLAY FAILURE/SUCCESS MESSAGES *****/
 
   if (!result) {
     return {fail: 'Oops, you forgot to return a result. Did you accidentally delete `return directoryContents`?'}

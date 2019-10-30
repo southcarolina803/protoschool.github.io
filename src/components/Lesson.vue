@@ -317,16 +317,22 @@ export default {
       }
       // Hide the solution
       this.viewSolution = false
-      // Run the `validate` function in the lesson
-      let test = await this.$attrs.validate(result, ipfs, args)
 
-      if (test === undefined) {
-        if (result instanceof Error) {
-          // show the user the error message
-          test = result
-        } else {
-          // show the default error message
-          test = { fail: 'Something is wrong. Reset the code and see the instructions.' }
+      let test
+
+      if (result instanceof Error) {
+        test = {
+          fail: result.toString()
+        }
+      } else {
+        // Run the `validate` function in the lesson
+        try {
+          test = await this.$attrs.validate(result, ipfs, args)
+        } catch (err) {
+          // Something in our validation threw an error, it's probably a bug
+          test = {
+            fail: 'Something is wrong. Reset the code and see the instructions.'
+          }
         }
       }
 

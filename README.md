@@ -367,6 +367,8 @@ Be sure to adapt your test case so that it works within the context of your othe
 
 If you don't return anything from your custom validation and running the users' solution caused an Error to be thrown, it'll be shown to the user, otherwise a default error message will be shown asking them to reset their solution text and try again.
 
+Your custom validation should not throw an error - if it does the default error message will be shown to the user asking them to reset their solution and try again.
+
 Note that most tutorial lessons will _not_ require the overriding of external
 errors. If you have questions about whether to use this optional feature, please reach
 out to the project maintainers for guidance.
